@@ -25,7 +25,7 @@ print( "== Data after filtering ======" );
 summary( powerCsptLog )
 # powerCsptLog 
 
-## Convert the column from 'character' to 'numeric' 
+## Convert the column from 'character' to 'numeric'.
 powerCsptLog$Sub_metering_1<-as.numeric(powerCsptLog$Sub_metering_1) 
 powerCsptLog$Sub_metering_2<-as.numeric(powerCsptLog$Sub_metering_2) 
 powerCsptLog$Sub_metering_3<-as.numeric(powerCsptLog$Sub_metering_3)  
