@@ -41,7 +41,9 @@ library( datasets )
 #par(bg = "white")
 attach(mtcars)
 par(mfrow=c(2,2))
+
 ## the top-left sub-figure
+xticks <- weekdays( as.Date( subset( powerCsptLog$Date, powerCsptLog$Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | powerCsptLog$Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ), '%d/%m/%Y' ) )
 with( subset( powerCsptLog, Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ), plot( seq( from = 1, to = length( Global_active_power ) ), Global_active_power, type = "l", xaxt = "n", xlab = "", ylab = "Global Active Power", main = "" ) )
 axis( side = 1, at = c( seq_along( xticks )[!duplicated( xticks  )], length( xticks ) + 1 ),
       labels = c( strtrim( xticks[!duplicated( xticks )], 3 ), "Sat" ) )
@@ -52,7 +54,6 @@ axis( side = 1, at = c( seq_along( xticks )[!duplicated( xticks  )], length( xti
       labels = c( strtrim( xticks[!duplicated( xticks )], 3 ), "Sat" ) )
 
 ## the bottom-left sub-figure
-xticks <- weekdays( as.Date( subset( powerCsptLog$Date, powerCsptLog$Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | powerCsptLog$Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ), '%d/%m/%Y' ) )
 with( subset( powerCsptLog, Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ),
 	plot( seq( from = 1, to = length( Sub_metering_1 ) ), Sub_metering_1, type = "l", col="black", xaxt = "n", xlab = "", ylab = "Energy sub metering", main = "" ) )
 with( subset( powerCsptLog, Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ),
