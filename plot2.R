@@ -27,6 +27,8 @@ summary( powerCsptLog )
 
 ## Convert the column from 'character' to 'numeric' 
 powerCsptLog$Global_active_power<-as.numeric(powerCsptLog$Global_active_power) 
+
+## Make x tick label
 powerCsptLog$Date	<- as.Date( powerCsptLog$Date, '%d/%m/%Y' )
 
 ## Make the figure.
@@ -34,6 +36,7 @@ library( datasets )
 #par(bg = "white")
 xticks <- weekdays( as.Date( subset( powerCsptLog$Date, powerCsptLog$Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | powerCsptLog$Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ), '%d/%m/%Y' ) )
 with( subset( powerCsptLog, Date == as.Date( "1/2/2007", '%d/%m/%Y' ) | Date == as.Date( "2/2/2007", '%d/%m/%Y' ) ), plot( seq( from = 1, to = length( Global_active_power ) ), Global_active_power, type = "l", xaxt = "n", xlab = "", ylab = "Global Active Power (kilowatts)", main = "" ) )
-axis( side = 1, at = seq( from = 1, to = length( xticks )), labels = xticks )
+axis( side = 1, at = c( seq( from = 1, to = length( xticks ), by=length( xticks )/2), length( xticks ) + 1 ),
+      labels = c( strtrim( xticks[ seq( from = 1, to = length( xticks ), by=length( xticks )/2) ], 3 ), "Sat" ) )
 dev.copy(png, file = "./figure/plot2.png", width=480, height=480) ## Copy my plot to a PNG file
 dev.off() 
